@@ -1,0 +1,122 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  width: 19rem;
+}
+
+.card-top-left {
+  background-color: red;
+  color: white;
+  height: 2rem;
+  width: 3.3rem;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-top-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.heart-icon {
+  color: #FFAA04;
+}
+
+.scales-icon {
+  color: grey;
+}
+
+.card-main {
+  margin: 1rem 0 5rem 0;
+}
+
+.card-main img {
+  height: 10rem;
+}
+
+.card-description {
+  width: 19rem;
+}
+
+.card-rate {
+  display: flex;
+  gap: 1rem;
+  margin: 0.5rem 0;
+}
+
+.stars-icon {
+  color: #FFAA04;
+}
+
+.comments-icon {
+  color: grey;
+}
+
+.comments-icon i {
+  margin-right: 0.3rem;
+}
+
+.card-sale {
+  color: grey;
+  text-decoration: line-through
+}
+
+.card-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-price-number {
+  color: red;
+  font-size: 1.5rem;
+}
+
+.cart-icon {
+  color: #00bc52;
+}
+
+.card-text {
+  font-size: small;
+  color: #00bc52;
+}
+
+@media screen and (min-width: 481px) and (max-width: 1200px) {
+  .text-phone {
+    display: none;
+  }
+  .text-tv {
+    display: none;
+  }
+}
+
+/* Медиа-запрос для телефонов */
+@media screen and (min-width: 1px) and (max-width: 480px) {
+  .text-tablet {
+    display: none;
+  }
+  .text-tv {
+    display: none;
+  }
+}
+
+/* Медиа-запрос для телевизоров */
+@media screen and (min-width: 1200px) {
+  .text-phone {
+    display: none;
+  }
+  .text-tablet {
+    display: none;
+  }
+}
