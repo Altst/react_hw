@@ -1,0 +1,42 @@
+.container{
+    border: 1px rgba(128, 128, 128, 0.2) solid;
+    padding: 1rem;
+    width: 30rem;
+    height: 13rem;
+}
+.photo{
+    width: 10rem;
+}
+.main{
+    display: flex;
+    justify-content: center;
+}
+.popular{
+    color:dodgerblue;
+    font-weight: bold;
+    text-align: right;
+    margin-bottom: 0.5rem;
+}
+.main-left{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.main-right{
+    width: 40%;
+}
+.desription{
+    font-size: 1.5rem;
+}
+.price{
+    font-weight: bold;
+}
+.buy{
+    background-color:darkorange;
+    width: 7rem;
+    padding: 0.3rem 0;
+    text-align: center;
+    border-radius: 1rem;
+    cursor: pointer;
+}
