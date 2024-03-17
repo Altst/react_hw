@@ -36,11 +36,23 @@
     transform: rotate(360deg);
   }
 }
+.wrapper{
+  display: flex;
+  flex-direction: column;
+}
 .container{
   display: flex;
   flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
 }
-.imgs{
+.card{
+  border: 1px solid black;
+  padding: 0.5rem;
+  width: 20rem;
+  height: 10rem;
+  text-align: center;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
 }
