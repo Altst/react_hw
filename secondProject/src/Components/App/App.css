@@ -1,58 +1,54 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-.wrapper{
-  display: flex;
-  flex-direction: column;
-}
 .container{
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 1rem;
 }
-.card{
-  border: 1px solid black;
-  padding: 0.5rem;
-  width: 20rem;
-  height: 10rem;
-  text-align: center;
+.table{
+  width: 23rem !important;
+}
+.table th{
+  color: grey;
+}
+.uah{
+  color: grey;
+}
+.right{
+  margin-left: 3rem;
+  margin-top: 0.7rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+}
+.right-title{
+  color: grey;
+}
+.right-currencies{
+  display: flex;
+  gap: 1rem;
+}
+.right-currency{
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  padding: 0 1.5rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: 0.3rem;
+}
+.right-money{
+  display: flex;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+.input{
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  height: 2.4rem;
+  border-radius: 0.3rem;
+}
+.output{
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  height: 2.4rem;
+  border-radius: 0.3rem;
+  width: 11.3rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 0.6rem;
+  background-color: rgba(128, 128, 128, 0.2);
 }

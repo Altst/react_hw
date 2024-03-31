@@ -1,91 +1,107 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [books, setBooks] = useState([]);
-  const [authorBooks, setAuthorBooks] = useState([]);
-  const [sortBy, setSortBy] = useState('');
 
-  const handleSearch = async () => {
-    try {
-      const response = await axios.get(
-        `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`
-      );
-      setBooks(response.data.items);
-    } catch (error) {
-      console.error('Error fetching books:', error);
-    }
-  };
+  const [currencies, setCurrencies] = useState([])
+  const [firstCurrency, setFirstCurrency] = useState('UAH')
+  const [secondCurrency, setSecondCurrency] = useState('USD')
+  const [sale, setSale] = useState('')
+  const [buy, setBuy] = useState('')
+  const [input, setInput] = useState('')
+  const [result, setResult] = useState('0.00')
 
-  const handleAuthorClick = async (authorName) => {
-    try {
-      const response = await axios.get(
-        `https://www.googleapis.com/books/v1/volumes?q=inauthor:${authorName}`
-      );
-      setAuthorBooks(response.data.items);
-    } catch (error) {
-      console.error('Error fetching author books:', error);
-    }
-  };
+  const handleFirstValueChange = (e) => {
+    setFirstCurrency(e.target.value)
+  }
+  const handleSecondValueChange = (e) => {
+    setSecondCurrency(e.target.value)
+  }
+  const handleInput = (e) => {
+    setInput(e.target.value)
+  }
 
-  const handleSort = (sortBy) => {
-    if (sortBy === 'year') {
-      setBooks([...books.sort((a, b) => a.volumeInfo.publishedDate.localeCompare(b.volumeInfo.publishedDate))]);
-    } else if (sortBy === 'name') {
-      setBooks([...books.sort((a, b) => a.volumeInfo.title.localeCompare(b.volumeInfo.title))]);
+  useEffect(() => {
+    getCurrencies()
+  }, [])
+  useEffect(() => {
+    console.log(firstCurrency + secondCurrency);
+    currencies.forEach(e => {
+      if (e.ccy === secondCurrency) {
+        console.log(e.ccy)
+        setSale(e.sale)
+        setBuy(e.buy)
+      }
+    })
+  }, [firstCurrency, secondCurrency]);
+  useEffect(() => {
+    currencies.forEach(e => {
+      if (e.ccy === secondCurrency) {
+        console.log(e.ccy)
+        setSale(e.sale)
+        setBuy(e.buy)
+      }
+    })
+  }, [currencies]);
+  useEffect(() => {
+    if(input.length > 0){
+      setResult(parseFloat(input)/parseFloat(buy))
     }
-    setSortBy(sortBy);
-  };
+    else{
+      setResult('0.00')
+    }
+  }, [input])
+
+  const getCurrencies = () => {
+    axios.get('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5')
+      .then(function (response) {
+        setCurrencies(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+  }
 
   return (
-    <div>
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="Enter book title..."
-      />
-      <button onClick={handleSearch}>Search</button>
-      <div className='wrapper'>
-        <div>
-          <label>Sort by: </label>
-          <select value={sortBy} onChange={(e) => handleSort(e.target.value)}>
-            <option value="">None</option>
-            <option value="year">Year</option>
-            <option value="name">Name</option>
-          </select>
-        </div>
-        <div className='container'>
-          {books.map((book) => (
-            <div key={book.id} className='card'>
-              <h3>{book.volumeInfo.title}</h3>
-              <p>
-                <span
-                  style={{ cursor: 'pointer', textDecoration: 'underline' }}
-                  onClick={() => handleAuthorClick(book.volumeInfo.authors[0])}
-                >
-                  {book.volumeInfo.authors[0]}
-                </span>
-              </p>
-              <p> {book.volumeInfo.publishedDate}</p>
-            </div>
+    <div className='container'>
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col">Валюта</th>
+            <th scope="col">Купівля</th>
+            <th scope="col">Продаж</th>
+          </tr>
+        </thead>
+        <tbody>
+          {currencies.map(currency => (
+            <tr>
+              <td>{currency.ccy}<span className='uah'> {currency.base_ccy}</span></td>
+              <td>{currency.buy}</td>
+              <td>{currency.sale}</td>
+            </tr>
           ))}
+        </tbody>
+      </table>
+      <div className='right'>
+        <div className='right-title'>Конвертер валют</div>
+        <div className='right-currencies'>
+          <select className="form-select" aria-label="Default select example" onChange={(e) => { handleFirstValueChange(e) }}>
+            <option value='UAH'>Українська гривня</option>
+            <option value="USD">Долар США</option>
+            <option value="EUR">Євро</option>
+          </select>
+          <select className="form-select" aria-label="Default select example" onChange={(e) => { handleSecondValueChange(e) }}>
+            <option value='USD'>Долар США</option>
+            <option value="UAH">Українська гривня</option>
+            <option value="EUR">Євро</option>
+          </select>
+          <div className='right-currency'>{sale}</div>
         </div>
-        {authorBooks.length > 0 && (
-          <div>
-            <h2>Other books by {authorBooks[0].volumeInfo.authors[0]}</h2>
-            <div className='container'>
-              {authorBooks.map((book) => (
-                <div key={book.id} className='card'>
-                  <h3>{book.volumeInfo.title}</h3>
-                  <p> {book.volumeInfo.publishedDate}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        <div className='right-money'>
+          <input className='input' onChange={handleInput}></input>
+          <div className='output'>{result}</div>
+        </div>
       </div>
     </div>
   );
