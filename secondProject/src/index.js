@@ -4,7 +4,7 @@ import './index.css';
 import App from './Components/App/App';
 //import Card from './Components/Card/Card'
 //import User from './Components/User/User'
-import Nasa from './Components/Nasa/Nasa'
+// import Nasa from './Components/Nasa/Nasa'
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
